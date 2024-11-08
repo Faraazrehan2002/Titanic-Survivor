@@ -19,7 +19,7 @@ struct TitanicSurvivalProjectModel: Identifiable{
     var fare: Double
     var port: String
     
-    static let passengerClassOptions: [String] = ["FirstClass", "SecondClass", "ThirdClass"]
+    static let passengerClassOptions: [String] = ["First Class", "Second Class", "Third Class"]
     static let portOptions = ["Cherbourg", "Queenstown", "Southampton"]
     static let sexOptions = ["Male", "Female"]
     
