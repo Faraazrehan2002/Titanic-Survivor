@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TitanicSurvivalProjectModel: Identifiable{
+struct TitanicSurvivalModel: Identifiable{
     
     let id = UUID()
     
@@ -19,15 +19,16 @@ struct TitanicSurvivalProjectModel: Identifiable{
     var fare: Double
     var port: String
     
+    
     static let passengerClassOptions: [String] = ["First Class", "Second Class", "Third Class"]
     static let portOptions = ["Cherbourg", "Queenstown", "Southampton"]
     static let sexOptions = ["Male", "Female"]
     
     var pClass: Int64{
         switch passengerClass{
-            case "FirstClass": return 1
-            case "SecondClass": return 2
-            case "ThirdClass": return 3
+            case "First Class": return 1
+            case "Second Class": return 2
+            case "Third Class": return 3
             default: return 0
         }
     }

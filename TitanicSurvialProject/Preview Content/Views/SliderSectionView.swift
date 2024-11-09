@@ -11,9 +11,9 @@ struct SliderSectionView: View {
     
     @Binding var sliderValue: Double
     
-    let prompt: String
-    
     let sliderTitle: String
+    
+    let prompt: String
     
     let sliderMinValue: Double
     
@@ -36,8 +36,8 @@ struct SliderSectionView: View {
     Form{
         SliderSectionView(
             sliderValue: .constant(5),
-            prompt: "Number of parents/children",
             sliderTitle: "Parents/Children",
+            prompt: "Number of parents/children",
             sliderMinValue: 0,
             sliderMaxValue: 20,
             sliderStep: 1

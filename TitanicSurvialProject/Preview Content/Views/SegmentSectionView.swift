@@ -36,14 +36,14 @@ struct SegmentSectionView: View {
     Form {
         SegmentSectionView(
             selectedSegment: .constant("Second Class"),
-            options: TitanicSurvivalProjectModel.passengerClassOptions,
+            options: TitanicSurvivalModel.passengerClassOptions,
             sectionTitle: "Passenger Class",
             prompt: "What is your passenger class?"
         )
         
         SegmentSectionView(
             selectedSegment: .constant("Port"),
-            options: TitanicSurvivalProjectModel.portOptions,
+            options: TitanicSurvivalModel.portOptions,
             sectionTitle: "Port",
             prompt: "What port did you emabrk from?"
         )

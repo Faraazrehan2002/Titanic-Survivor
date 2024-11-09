@@ -5,12 +5,19 @@
 //  Created by Faraaz Rehan Junaidi Mohammed on 11/7/24.
 //
 
+//
+//  ContentView.swift
+//  TitanicSurvialProject
+//
+//  Created by Faraaz Rehan Junaidi Mohammed on 11/7/24.
+//
+
 import SwiftUI
 import CoreML
 
 struct MainView: View {
     
-    @State private var tm: TitanicSurvivalProjectModel = .init(
+    @State private var tm: TitanicSurvivalModel = .init(
         passengerClass: "Second Class",
         sex: "Male",
         age: 22,
@@ -20,7 +27,7 @@ struct MainView: View {
         port: "Southampton"
     )
     
-    @State private var survival: Bool? = nil
+    @State var survival: Bool? = nil
     
     @State private var survivalRate: Double = -1
     
@@ -33,7 +40,7 @@ struct MainView: View {
                     // Passenger Class
                     SegmentSectionView(
                         selectedSegment: $tm.passengerClass,
-                        options: TitanicSurvivalProjectModel.passengerClassOptions,
+                        options: TitanicSurvivalModel.passengerClassOptions,
                         sectionTitle: "Passenger Class",
                         prompt: "What is your passenger class?"
                     )
@@ -41,7 +48,7 @@ struct MainView: View {
                     // Sex
                     SegmentSectionView(
                         selectedSegment: $tm.sex,
-                        options: TitanicSurvivalProjectModel.sexOptions,
+                        options: TitanicSurvivalModel.sexOptions,
                         sectionTitle: "Sex",
                         prompt: "What is your sex?"
                     )
@@ -49,8 +56,8 @@ struct MainView: View {
                     // Age
                     SliderSectionView(
                         sliderValue: $tm.age,
-                        prompt: "Age: \(tm.age.formatted())",
                         sliderTitle: "Age",
+                        prompt: "Age: \(tm.age.formatted())",
                         sliderMinValue: 0,
                         sliderMaxValue: 120,
                         sliderStep: 0.5
@@ -59,8 +66,8 @@ struct MainView: View {
                     // Siblings/Spouses
                     SliderSectionView(
                         sliderValue: $tm.siblingsSpouses,
-                        prompt: "Number of siblings/spouses: \(tm.siblingsSpouses.formatted())",
                         sliderTitle: "Siblings/Spouses",
+                        prompt: "Number of siblings/spouses: \(tm.siblingsSpouses.formatted())",
                         sliderMinValue: 0,
                         sliderMaxValue: 10,
                         sliderStep: 1
@@ -69,8 +76,8 @@ struct MainView: View {
                     // Parents/Children
                     SliderSectionView(
                         sliderValue: $tm.parentsChildren,
-                        prompt: "Number of parents/children: \(tm.parentsChildren.formatted())",
                         sliderTitle: "Parents/Children",
+                        prompt: "Number of parents/children: \(tm.parentsChildren.formatted())",
                         sliderMinValue: 0,
                         sliderMaxValue: 20,
                         sliderStep: 1
@@ -79,8 +86,8 @@ struct MainView: View {
                     // Fare
                     SliderSectionView(
                         sliderValue: $tm.fare,
-                        prompt: "Ticket Price: £\(tm.fare.formatted())",
                         sliderTitle: "Fare",
+                        prompt: "Ticket Price: £\(tm.fare.formatted())",
                         sliderMinValue: 0,
                         sliderMaxValue: 600,
                         sliderStep: 0.1
@@ -89,11 +96,14 @@ struct MainView: View {
                     // Port
                     SegmentSectionView(
                         selectedSegment: $tm.port,
-                        options: TitanicSurvivalProjectModel.portOptions,
+                        options: TitanicSurvivalModel.portOptions,
                         sectionTitle: "Port",
                         prompt: "What port did you emabrk from?"
                     )
                 }
+                .scrollIndicators(.hidden)
+                .blur(radius: showAlert ? 5: 0)
+                .disabled(showAlert)
                 
                 if showAlert{
                     Button(action: {
@@ -107,13 +117,19 @@ struct MainView: View {
                                 
                                 Text("Probability of Survival: \(survivalRate.formatted())")
                             }
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(Color.white)
+                            
+                            
                         }
                     })
                 }
                 
             }
-            .navigationBarTitle("Titanic Survival Predictor", displayMode: .inline)
+            
         }
+        .navigationBarTitle("Titanic Survival Predictor")
         .toolbar{
             ToolbarItem(placement: .bottomBar){
                 Button(action: estimateSurvival, label: {
@@ -138,13 +154,13 @@ struct MainView: View {
                 Parch: Int64(tm.parentsChildren),
                 Fare: tm.fare,
                 Embarked: String(tm.port.first ?? "S")
-                
             )
-            
+            print(prediction)
             survivalRate = prediction.Survived
             survival = prediction.Survived > 0.5
         }catch{
             survival = nil
+            print("Error: \(error.localizedDescription)")
         }
         showAlert = true
     }
