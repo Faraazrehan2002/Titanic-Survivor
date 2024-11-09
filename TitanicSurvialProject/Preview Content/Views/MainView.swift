@@ -38,24 +38,44 @@ struct MainView: View {
             )
             
             // Age
-            Section("Age"){
-                Text("What is your age?")
-            }
+            SliderSectionView(
+                sliderValue: $tm.age,
+                prompt: "Age: \(tm.age.formatted())",
+                sliderTitle: "Age",
+                sliderMinValue: 0,
+                sliderMaxValue: 120,
+                sliderStep: 0.5
+            )
             
             // Siblings/Spouses
-            Section("Siblings/Spouses"){
-                Text("Number of siblings/spouses")
-            }
+            SliderSectionView(
+                sliderValue: $tm.siblingsSpouses,
+                prompt: "Number of siblings/spouses: \(tm.siblingsSpouses.formatted())",
+                sliderTitle: "Siblings/Spouses",
+                sliderMinValue: 0,
+                sliderMaxValue: 10,
+                sliderStep: 1
+            )
             
             // Parents/Children
-            Section("Parents/Children"){
-                Text("Number of parents/children")
-            }
+            SliderSectionView(
+                sliderValue: $tm.parentsChildren,
+                prompt: "Number of parents/children: \(tm.parentsChildren.formatted())",
+                sliderTitle: "Parents/Children",
+                sliderMinValue: 0,
+                sliderMaxValue: 20,
+                sliderStep: 1
+            )
             
             // Fare
-            Section("Fare"){
-                Text("Ticket Price")
-            }
+            SliderSectionView(
+                sliderValue: $tm.fare,
+                prompt: "Ticket Price: £\(tm.fare.formatted())",
+                sliderTitle: "Fare",
+                sliderMinValue: 0,
+                sliderMaxValue: 600,
+                sliderStep: 0.1
+            )
             
             // Port
             SegmentSectionView(
