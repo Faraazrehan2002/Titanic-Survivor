@@ -22,14 +22,20 @@ struct MainView: View {
     var body: some View {
         Form {
             // Passenger Class
-            Section("Passenger Class"){
-                Text("What is your passenger class?")
-            }
+            SegmentSectionView(
+                selectedSegment: $tm.passengerClass,
+                options: TitanicSurvivalProjectModel.passengerClassOptions,
+                sectionTitle: "Passenger Class",
+                prompt: "What is your passenger class?"
+            )
             
             // Sex
-            Section("Sex"){
-                Text("What is your sex?")
-            }
+            SegmentSectionView(
+                selectedSegment: $tm.sex,
+                options: TitanicSurvivalProjectModel.sexOptions,
+                sectionTitle: "Sex",
+                prompt: "What is your sex?"
+            )
             
             // Age
             Section("Age"){
@@ -52,9 +58,12 @@ struct MainView: View {
             }
             
             // Port
-            Section("Port"){
-                Text("What port did you embark from?")
-            }
+            SegmentSectionView(
+                selectedSegment: $tm.port,
+                options: TitanicSurvivalProjectModel.portOptions,
+                sectionTitle: "Port",
+                prompt: "What port did you emabrk from?"
+            )
         }
         
     }

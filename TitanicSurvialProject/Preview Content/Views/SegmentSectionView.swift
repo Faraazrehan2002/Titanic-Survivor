@@ -38,7 +38,15 @@ struct SegmentSectionView: View {
             selectedSegment: .constant("Second Class"),
             options: TitanicSurvivalProjectModel.passengerClassOptions,
             sectionTitle: "Passenger Class",
-            prompt: "What passenger class are you?"
+            prompt: "What is your passenger class?"
         )
+        
+        SegmentSectionView(
+            selectedSegment: .constant("Port"),
+            options: TitanicSurvivalProjectModel.portOptions,
+            sectionTitle: "Port",
+            prompt: "What port did you emabrk from?"
+        )
+
     }
 }
