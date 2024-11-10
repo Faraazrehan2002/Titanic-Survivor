@@ -129,12 +129,12 @@ struct MainView: View {
             }
             
         }
-        .navigationBarTitle("Titanic Survival Predictor")
+        .navigationTitle("Titanic Survival Predictor")
         .toolbar{
             ToolbarItem(placement: .bottomBar){
                 Button(action: estimateSurvival, label: {
                     Text("Estimate Survival").bold()
-                        .foregroundColor(.blue)
+                        .foregroundColor(Color.blue)
                         .opacity(showAlert ? 0 : 1)
                 })
             }
@@ -148,7 +148,7 @@ struct MainView: View {
             let model = try TitanicSurvivalProjectModel_1(configuration: config)
             let prediction = try model.prediction(
                 Pclass: tm.pClass,
-                Sex: tm.sex,
+                Sex: tm.sex.lowercased(),
                 Age: tm.age,
                 SibSp: Int64(tm.siblingsSpouses),
                 Parch: Int64(tm.parentsChildren),
